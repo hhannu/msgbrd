@@ -1,0 +1,53 @@
+<div class="main">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role='navigation'>
+        <div class='container-fluid'>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle='collapse' data-target='.navabar-ex-collapse'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand'>MsgBrd</a>
+            </div>
+            <div class='collapse navbar-collapse navabar-ex-collapse'>
+                <ul class="nav navbar-nav navbar-right">                    
+                    <li><a ng-click="showAll()"><span class="glyphicon glyphicon-home">All</a></li>
+                    <li class='active'><a><span class="glyphicon glyphicon-file">New</a></li>
+                    <li><a><span class="glyphicon glyphicon-remove">Delete</a></li>
+                    <li><a><span class="glyphicon glyphicon-refresh">Update</a></li>
+                    <li><a href="app/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="page-header">
+        <h3>Recent Messages</h3>
+    </div>
+    <div class="row">
+        <div id="list" class="col-md-8">
+            <div ng-repeat="post in message.messages" class="repeated-item">
+                <div ng-class-even="'even'">
+                    <h4>{{post.subject}}</h4>
+                    <p>{{post.text}}</p>
+                </div>
+            </div>        
+        </div>        
+        <div class="col-md-4">
+            <form role="form">
+                <div class="form-group">
+                    <label for="topic">Topic</label>
+                    <input type="text" id="topic" class="form-control" ng-model="message.subject">
+                </div>
+                <div class="form-group">
+                    <label for="msg">Message</label>
+                    <textarea type="text" id="msg" class="form-control" ng-model="message.text"></textarea>
+                </div>
+                <button type="button" class="btn btn-default" ng-click="message.send()"><span class="glyphicon glyphicon-send"></span> Send</button>
+            </form>
+        </div>
+    </div>
+    
+    <h4 ng-show='message.data.length === 0'>There are no messages at the moment</h4>
+</div>

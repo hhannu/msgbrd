@@ -1,0 +1,56 @@
+<div class="main">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role='navigation'>
+        <div class='container-fluid'>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle='collapse' data-target='.navabar-ex-collapse'>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                    <span class='icon-bar'></span>
+                </button>
+                <a class='navbar-brand'>MsgBrd</a>
+            </div>
+            <div class='collapse navbar-collapse navabar-ex-collapse'>
+                <ul class="nav navbar-nav navbar-right">                    
+                    <li class='active'><a><span class="glyphicon glyphicon-home">All</a></li>
+                    <li><a ng-click="newMessage()"><span class="glyphicon glyphicon-file">New</a></li>
+                    <li><a><span class="glyphicon glyphicon-remove">Delete</a></li>
+                    <li><a><span class="glyphicon glyphicon-refresh">Update</a></li>
+                    <li><a href="app/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="page-header">
+        <h3>All Messages</h3>
+    </div>       
+    
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Filter messages by</h4>
+             <div class="form-group">
+                <label>Name:</label>
+                <select class="form-control" ng-model='filter.s_name' ng-options='name.name as name.name for name in filter.names'>
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Subject:</label>
+                <select class="form-control" ng-model='filter.s_subject' ng-options='subject.subject as subject.subject for subject in filter.subjects'>
+                    <option value=""></option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click='getResults()'><span class="glyphicon glyphicon-search">Get results</button>
+                  
+        </div>        
+        <div class="col-md-8">
+            <div ng-repeat="post in message.messages" class="repeated-item">
+                <div ng-class-even="'even'">
+                    <h4>{{post.subject}}</h4>
+                    <p>{{post.text}}</p>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>

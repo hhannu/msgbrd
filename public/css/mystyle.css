@@ -1,0 +1,55 @@
+.main {
+    
+    width: 780px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 50px;
+}
+
+.error {
+    color: red;
+}
+
+#list {
+    height: 320px;
+    overflow: auto;
+}
+
+.even {
+    color: black;
+    background-color: lightgray;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.repeated-item.ng-enter {
+    -webkit-transition: 1s linear all;
+    -moz-transition: 1s linear all;
+    -o-transition: 1s linear all;
+    transition: 1s linear all;
+    opacity:0;
+}
+
+.repeated-item.ng-enter.ng-enter-active {
+    -webkit-transition: 1s linear all;
+    -moz-transition: 1s linear all;
+    -o-transition: 1s linear all;
+    transition: 1s linear all;
+    opacity: 1;
+}
+
+html,
+    body {
+        height: 100%;
+        background-color: #333;
+    }
+    body {
+        color: #fff;
+        text-shadow: 0 1px 3px rgba(0,0,0,.5);
+    }
+
+.cover-container {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}

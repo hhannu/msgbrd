@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="cover-container">
+        <h1>MsgBrd Login</h1>
+        <br>
+        <br>
+        <form role="form" name='loginForm'>
+            <div class="form-group">
+                <label for="name">Username</label>
+                <input type="text" id="name" class="form-control" ng-model='user.username' required>
+            </div>
+            <div class="form-group">
+                <label for="pass">Password</label>
+                <input type="password" id="pass" class="form-control" ng-model='user.password' required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" class="form-control" ng-disabled='!user.checked' ng-model='user.email' ng-required='user.checked'>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="box" ng-model='user.checked'>
+                    Enable registration
+                </label>
+            </div>
+            
+            <button type="button" class="btn btn-primary btn-lg"  ng-disabled='user.checked' ng-click='user.login()'>Login</button>
+            <button type="button" class="btn btn-primary btn-lg" ng-disabled='!user.checked' ng-click='user.register()'>Register</button>
+        </form>
+        <p class='error' ng-show='user.showError'>Username allready in use. Try another one</p>
+    </div>
+     <div class="alert alert-danger alert-dismissible" role="alert" id='myAlert'>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>Error!</strong>You must fill in all the information.
+    </div>
+</div>
