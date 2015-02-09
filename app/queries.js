@@ -63,7 +63,7 @@ module.exports.getRecentMessages = function(req,res){
 
 module.exports.getAllMessages = function(req,res){
     
-    console.log('getAllMessages: ' + req.user.name);
+    //console.log('getAllMessages: ' + req.user.name);
     
     var options = {
         path: 'messages',
@@ -81,7 +81,7 @@ module.exports.getAllMessages = function(req,res){
 
 module.exports.getFilters = function(req,res){
     
-    console.log('getFilters');
+    //console.log('getFilters');
     
     User.find().select('name').exec(function(err,popul){
         Message.find().select('subject').exec(function(err,messages){
@@ -96,18 +96,40 @@ module.exports.getFilters = function(req,res){
 module.exports.getMessages = function(req,res){
     
     //console.log('getMessages: ' + req.user.name);
+    var name = {};
+    var query;
     
     var options = {
         path: 'messages',
         //match: { subject: 'hello' },
         //options: { limit: 5 }
     }
+    //{"name":null,"match":{"subject":"x"}}
     
-    var query = User.find({name: req.user.name}).populate(options);
+    var filter = JSON.parse(req.query.id);
+    if(filter.name !== null)
+        name = { name: filter.name };
+        
+    if(filter.match !== null)
+        options.match = filter.match;
+    
+    console.log('getMessages: ' + JSON.stringify(name) + ' ' + JSON.stringify(options));
+    query = User.find(name).populate(options);
     
     query.exec(function(err,data){
-        //console.log(data);
+        console.log(data);
+        
+        for(var i = 0; i < data.length; i++) {
+            if(data[i].messages.length == 0) {
+                data.splice(i, 1);
+            }
+        }
         res.send(data[0]);
     });
 }
 
+module.exports.deleteMessage = function(req,res){
+    Message.findOne({_id:req.query.id}).remove().exec(function(err,done){
+        res.send('deleted');
+    });
+}

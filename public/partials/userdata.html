@@ -14,8 +14,6 @@
                 <ul class="nav navbar-nav navbar-right">                    
                     <li><a ng-click="showAll()"><span class="glyphicon glyphicon-home">All</a></li>
                     <li class='active'><a><span class="glyphicon glyphicon-file">New</a></li>
-                    <li><a><span class="glyphicon glyphicon-remove">Delete</a></li>
-                    <li><a><span class="glyphicon glyphicon-refresh">Update</a></li>
                     <li><a href="app/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                 </ul>
             </div>
@@ -31,8 +29,10 @@
                 <div ng-class-even="'even'">
                     <h4>{{post.subject}}</h4>
                     <p>{{post.text}}</p>
+                    <p>Sent by: {{message.user}} at {{post.timestamp}}</p>
                 </div>
-            </div>        
+            </div>  
+            <h4 ng-show='message.messages.length === 0'>No messages at the moment</h4>
         </div>        
         <div class="col-md-4">
             <form role="form">
@@ -48,6 +48,4 @@
             </form>
         </div>
     </div>
-    
-    <h4 ng-show='message.data.length === 0'>There are no messages at the moment</h4>
 </div>

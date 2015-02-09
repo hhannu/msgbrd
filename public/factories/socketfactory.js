@@ -39,5 +39,9 @@ module.factory('SocketFactory',['$resource', '$location', function($resource, $l
         return $resource('/app/filters').get().$promise;
     };
     
+    factory.deleteMessage = function(msg){
+        return $resource('/app/delete', {id:msg}).delete().$promise;
+    };   
+    
     return factory;
 }]);

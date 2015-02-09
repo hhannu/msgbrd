@@ -32,4 +32,8 @@ router.get('/search', function(req, res) {
     req.queries.getMessages(req,res);
 });
 
+router.delete('/delete', function(req, res) {
+    req.queries.deleteMessage(req,res);
+});
+
 module.exports = router;

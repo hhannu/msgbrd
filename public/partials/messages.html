@@ -14,8 +14,6 @@
                 <ul class="nav navbar-nav navbar-right">                    
                     <li class='active'><a><span class="glyphicon glyphicon-home">All</a></li>
                     <li><a ng-click="newMessage()"><span class="glyphicon glyphicon-file">New</a></li>
-                    <li><a><span class="glyphicon glyphicon-remove">Delete</a></li>
-                    <li><a><span class="glyphicon glyphicon-refresh">Update</a></li>
                     <li><a href="app/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                 </ul>
             </div>
@@ -31,26 +29,30 @@
             <h4>Filter messages by</h4>
              <div class="form-group">
                 <label>Name:</label>
-                <select class="form-control" ng-model='filter.s_name' ng-options='name.name as name.name for name in filter.names'>
+                <select class="form-control" ng-model='byname' ng-options='name.name as name.name for name in filter.names'>
                     <option value=""></option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Subject:</label>
-                <select class="form-control" ng-model='filter.s_subject' ng-options='subject.subject as subject.subject for subject in filter.subjects'>
+                <select class="form-control" ng-model='bysubject' ng-options='subject.subject as subject.subject for subject in filter.subjects'>
                     <option value=""></option>
                 </select>
             </div>
-            <button type="button" class="btn btn-primary" ng-click='getResults()'><span class="glyphicon glyphicon-search">Get results</button>
+            <button type="button" class="btn btn-primary" ng-click='filterMessages()'><span class="glyphicon glyphicon-search">Search</button>
                   
         </div>        
         <div class="col-md-8">
             <div ng-repeat="post in message.messages" class="repeated-item">
-                <div ng-class-even="'even'">
-                    <h4>{{post.subject}}</h4>
+                <div ng-class-odd="'odd'" ng-class-even="'even'">
+                    <h4>{{post.subject}}<button type="button" class="btn btn-default btn-xs deleteButton" ng-click='deleteMessage($index)'><span class="glyphicon glyphicon-remove"></span>delete </button>
+                    </h4>
                     <p>{{post.text}}</p>
+                    <p>Sent by: {{message.user}} at {{post.timestamp}}</p>
+                    
                 </div>
-            </div>  
+            </div>            
+            <h4 ng-show='message.messages.length === 0'>No messages found</h4>
         </div>
     </div>
 </div>
