@@ -56,4 +56,7 @@ io.on('connection', function(socket){
 });
 
 //app.listen(3000);
-server.listen(3000);
+
+var port = process.env.OPENSHIFT_NODEJS_PORT || '3000';
+
+server.listen(port);
