@@ -57,6 +57,9 @@ io.on('connection', function(socket){
 
 //app.listen(3000);
 
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || '3000';
 
-server.listen(port);
+server.listen(port, ipaddress, function() {
+    console.log('Node server started on %s:%d', ipaddress, port);
+});

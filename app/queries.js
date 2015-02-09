@@ -113,11 +113,11 @@ module.exports.getMessages = function(req,res){
     if(filter.match !== null)
         options.match = filter.match;
     
-    console.log('getMessages: ' + JSON.stringify(name) + ' ' + JSON.stringify(options));
+    //console.log('getMessages: ' + JSON.stringify(name) + ' ' + JSON.stringify(options));
     query = User.find(name).populate(options);
     
     query.exec(function(err,data){
-        console.log(data);
+        console.log('getMessages: ' + data);
         
         for(var i = 0; i < data.length; i++) {
             if(data[i].messages.length == 0) {

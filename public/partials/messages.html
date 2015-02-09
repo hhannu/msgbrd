@@ -45,7 +45,7 @@
         <div class="col-md-8">
             <div ng-repeat="post in message.messages" class="repeated-item">
                 <div ng-class-odd="'odd'" ng-class-even="'even'">
-                    <h4>{{post.subject}}<button type="button" class="btn btn-default btn-xs deleteButton" ng-click='deleteMessage($index)'><span class="glyphicon glyphicon-remove"></span>delete </button>
+                    <h4>{{post.subject}}<button type="button" class="btn btn-default btn-xs deleteButton" ng-click="deleteMessage($index)" ng-show="message.id === post.owner"><span class="glyphicon glyphicon-remove"></span>delete </button>
                     </h4>
                     <p>{{post.text}}</p>
                     <p>Sent by: {{message.user}} at {{post.timestamp}}</p>

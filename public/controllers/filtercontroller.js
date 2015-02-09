@@ -14,6 +14,7 @@ module.controller('FilterController',['$scope', '$resource', 'SocketFactory', fu
     SocketFactory.getAllMessages().then(function(data){
         $scope.message.messages = data.messages;
         $scope.message.user = data.name;
+        $scope.message.id = data._id;
         //console.log(data);
     });
     
@@ -35,12 +36,13 @@ module.controller('FilterController',['$scope', '$resource', 'SocketFactory', fu
             query.match = null;            
         }
         
-        console.log('filterMessages' + JSON.stringify(query));
+        //console.log('filterMessages' + JSON.stringify(query));
         
         if(query.name === null && query.match === null)
             SocketFactory.getAllMessages().then(function(data){
                 $scope.message.messages = data.messages;
                 $scope.message.user = data.name;
+                //$scope.message.id = data._id;
                 //console.log(data);
             });
         else
@@ -52,6 +54,7 @@ module.controller('FilterController',['$scope', '$resource', 'SocketFactory', fu
                 else
                     $scope.message.messages = data.messages;
                 $scope.message.user = data.name;
+                //$scope.message.id = data._id;
             });
     };
     
