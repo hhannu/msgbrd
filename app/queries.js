@@ -93,7 +93,13 @@ module.exports.getAllMessages = function(req,res){
             if(users.messages[i] === null)
                 users.messages.splice(i, 1);
         
-        console.log('getAllMessages: ' + users.messages);
+        //console.log('getAllMessages: ' + users.messages);
+                
+        // sort by timestamp
+        users.messages.sort(function(a, b){
+            return b.timestamp - a.timestamp;
+        });
+        
         res.send(users);
     });
 }
@@ -147,6 +153,11 @@ module.exports.getMessages = function(req,res){
             if(users.messages[i] === null)
                 users.messages.splice(i, 1);  
         
+        // sort by timestamp
+        users.messages.sort(function(a, b){
+            return b.timestamp - a.timestamp;
+        });
+        
         res.send(users);
     });
 }
@@ -154,5 +165,19 @@ module.exports.getMessages = function(req,res){
 module.exports.deleteMessage = function(req,res){
     Message.findOne({_id:req.query.id}).remove().exec(function(err,done){
         res.send('deleted');
+    });
+    
+    console.log(req.query.id); 
+    User.findOne({name: req.user.name}, function(err, user){
+        if(user.messages !== null) {
+            for(var i = 0; i < user.messages.length; i++) {
+                
+                console.log(user.messages[i]);
+                if(user.messages[i] == req.query.id)
+                    user.messages.splice(i, 1);
+            }
+            user.save();  
+            console.log(user.messages);          
+        }    
     });
 }
