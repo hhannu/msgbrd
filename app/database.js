@@ -46,6 +46,7 @@ module.exports.User = User;
 
 var message = new Schema({
     owner: {type: Schema.Types.ObjectId, ref: 'User'},
+    sender: String,
     subject: {type: String, min: 3},
     text: String,
     timestamp: Date

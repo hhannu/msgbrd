@@ -5,7 +5,7 @@ module.controller('MessageController',['$scope', '$resource', 'SocketFactory',fu
        
     SocketFactory.getRecentMessages().then(function(data){
         $scope.message.messages = data.messages;
-        $scope.message.user = data.name;
+        $scope.username = data.name;
         //console.log(data);
     });
 
@@ -16,7 +16,8 @@ module.controller('MessageController',['$scope', '$resource', 'SocketFactory',fu
             return; 
 
         var message = {};
-        message.owner = $scope.message.user;
+        message.owner = $scope.username;
+        message.sender = $scope.username;
         message.subject = $scope.message.subject;
         message.text = $scope.message.text;
         message.timestamp = new Date();
@@ -32,7 +33,9 @@ module.controller('MessageController',['$scope', '$resource', 'SocketFactory',fu
         
     SocketFactory.notify = function(data){
         //console.log('received: ' + data);
-        $scope.message.messages.push(data);
+        if($scope.message.messages.length >= 5)
+            $scope.message.messages.pop();
+        $scope.message.messages.unshift(data);
         
         $scope.$apply();
         // or: 

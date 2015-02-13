@@ -1,6 +1,6 @@
 .main {
     
-    width: 780px;
+    width: 85%;
     margin: 0 auto;
     margin-top: 20px;
     padding: 50px;
@@ -16,8 +16,9 @@
 }
 
 .odd {
-    color: white;
-    background-color: darkgray;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: thin;
     padding: 5px;
     border-radius: 10px;
     margin-top: 5px;
@@ -29,6 +30,14 @@
     padding: 5px;
     border-radius: 10px;
     margin-top: 5px;
+}
+
+#subject {
+    text-decoration: underline;
+}
+
+#info {    
+    font-style: italic;
 }
 
 .repeated-item.ng-enter {

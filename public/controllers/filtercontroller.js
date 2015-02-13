@@ -2,6 +2,7 @@ module.controller('FilterController',['$scope', '$resource', 'SocketFactory', fu
         
     $scope.message = {};
     $scope.message.messages = [];
+    $scope.inverted = false;
     
     $scope.filter = {};
     
@@ -68,4 +69,8 @@ module.controller('FilterController',['$scope', '$resource', 'SocketFactory', fu
         });        
     };
     
+    $scope.invert = function() {
+        $scope.inverted = !$scope.inverted;
+        $scope.message.messages.reverse();
+    }
 }]);

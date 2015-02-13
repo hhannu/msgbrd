@@ -28,7 +28,7 @@ app.use(function(req,res,next){
 //Point static files to public folder
 app.use('/',express.static(__dirname + '/public'));
 app.use(bodyParser.json());
-app.use(session({secret: '5cc67ba0-333d-4008-84db-aa5c2c50f5e1', saveUninitialized: true, resave: true, cookie:{ maxAge:100000} }));
+app.use(session({secret: '5cc67ba0-333d-4008-84db-aa5c2c50f5e1', saveUninitialized: true, resave: true, cookie:{ maxAge:500000 } }));
 app.use(passport.initialize());
 app.use(passport.session());
 

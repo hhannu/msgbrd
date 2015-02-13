@@ -43,12 +43,14 @@
                   
         </div>        
         <div class="col-md-8">
+            <button type="button" class="btn btn-primary btn-block btn-xs" ng-click="invert()" ng-show="inverted === false"><span class="glyphicon glyphicon-chevron-up"></button>
+            <button type="button" class="btn btn-primary btn-block btn-xs" ng-click="invert()" ng-show="inverted === true"><span class="glyphicon glyphicon-chevron-down"></button>
             <div ng-repeat="post in message.messages" class="repeated-item">
                 <div ng-class-odd="'odd'" ng-class-even="'even'">
-                    <h4>{{post.subject}}<button type="button" class="btn btn-default btn-xs deleteButton" ng-click="deleteMessage($index)" ng-show="message.id === post.owner"><span class="glyphicon glyphicon-remove"></span>delete </button>
+                    <h4 id="subject">{{post.subject}}<button type="button" class="btn btn-default btn-xs deleteButton" ng-click="deleteMessage($index)" ng-show="message.user === post.sender"><span class="glyphicon glyphicon-remove"></span>delete </button>
                     </h4>
                     <p>{{post.text}}</p>
-                    <p>Sent by: {{message.user}} at {{post.timestamp}}</p>
+                    <p>Sent by: {{post.sender}} at {{post.timestamp}}</p>
                     
                 </div>
             </div>            

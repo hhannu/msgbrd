@@ -33,6 +33,7 @@ module.exports.saveMessage = function(data){
         //console.log(user);
         var message = new Message();
         message.owner = user;
+        message.sender = data.sender;
         message.subject = data.subject;
         message.text = data.text;
         message.timestamp = data.timestamp;        
@@ -48,17 +49,24 @@ module.exports.getRecentMessages = function(req,res){
     //console.log('getRecentMessages: ' + req.user.name);
     
     var options = {
-        path: 'messages',
+        path: 'sender',
         //match: { subject: 'hello' },
-        options: { limit: 5 }
+        options: { limit: 5, sort:{timestamp: -1}}
     }
     
-    var query = User.find({name: req.user.name}).populate(options);
+    var data = {name: req.user.name, messages: []};
     
-    query.exec(function(err,data){
-        //console.log(data);
-        res.send(data[0]);
+    Message.find({}).limit(5).sort('-timestamp').exec(function(err,msgs){
+        data.messages = msgs;
+        console.log(data);
+        res.send(data);
     });
+//    var query = User.find({name: req.user.name}).populate(options);
+//    
+//    query.exec(function(err,data){
+//        //console.log(data);
+//        res.send(data[0]);
+//    });
 }
 
 module.exports.getAllMessages = function(req,res){
@@ -71,11 +79,22 @@ module.exports.getAllMessages = function(req,res){
         //options: { limit: 5 }
     }
     
-    var query = User.find({name: req.user.name}).populate(options);
+    var query = User.find({}).populate(options);
     
     query.exec(function(err,data){
-        //console.log(data);
-        res.send(data[0]);
+        //console.log('getAllMessages: ' +data);
+        var users = { name: req.user.name, messages: []};
+        
+        for(var i = 0; i < data.length; i++)            
+            users.messages = users.messages.concat(data[i].messages);
+        
+        // delete empty messages
+        for(var i = 0; i < users.messages.length; i++)            
+            if(users.messages[i] === null)
+                users.messages.splice(i, 1);
+        
+        console.log('getAllMessages: ' + users.messages);
+        res.send(users);
     });
 }
 
@@ -118,13 +137,17 @@ module.exports.getMessages = function(req,res){
     
     query.exec(function(err,data){
         console.log('getMessages: ' + data);
+        var users = {name: req.user.name, messages: []};
         
         for(var i = 0; i < data.length; i++) {
-            if(data[i].messages.length == 0) {
-                data.splice(i, 1);
-            }
-        }
-        res.send(data[0]);
+            users.messages = users.messages.concat(data[i].messages);
+        }      
+        // delete empty messages
+        for(var i = 0; i < users.messages.length; i++)            
+            if(users.messages[i] === null)
+                users.messages.splice(i, 1);  
+        
+        res.send(users);
     });
 }
 

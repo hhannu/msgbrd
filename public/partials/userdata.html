@@ -24,17 +24,17 @@
         <h3>Recent Messages</h3>
     </div>
     <div class="row">
-        <div id="list" class="col-md-8">
+        <div class="col-md-6">
             <div ng-repeat="post in message.messages" class="repeated-item">
-                <div ng-class-even="'even'">
-                    <h4>{{post.subject}}</h4>
+                <div ng-class-odd="'odd'" ng-class-even="'even'">
+                    <h4 id="subject">{{post.subject}}</h4>
                     <p>{{post.text}}</p>
-                    <p>Sent by: {{message.user}} at {{post.timestamp}}</p>
+                    <p id="info">Sent by: {{post.sender}} at {{post.timestamp}}</p>
                 </div>
             </div>  
             <h4 ng-show='message.messages.length === 0'>No messages at the moment</h4>
         </div>        
-        <div class="col-md-4">
+        <div class="col-md-6">
             <form role="form">
                 <div class="form-group">
                     <label for="topic">Topic</label>
