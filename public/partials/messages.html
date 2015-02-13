@@ -12,8 +12,8 @@
             </div>
             <div class='collapse navbar-collapse navabar-ex-collapse'>
                 <ul class="nav navbar-nav navbar-right">                    
-                    <li class='active'><a><span class="glyphicon glyphicon-home">All</a></li>
                     <li><a ng-click="newMessage()"><span class="glyphicon glyphicon-file">New</a></li>
+                    <li class='active'><a><span class="glyphicon glyphicon-home">All</a></li>
                     <li><a href="app/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                 </ul>
             </div>
@@ -50,7 +50,7 @@
                     <h4 id="subject">{{post.subject}}<button type="button" class="btn btn-default btn-xs deleteButton" ng-click="deleteMessage($index)" ng-show="message.user === post.sender"><span class="glyphicon glyphicon-remove"></span>delete </button>
                     </h4>
                     <p>{{post.text}}</p>
-                    <p>Sent by: {{post.sender}} at {{post.timestamp}}</p>
+                    <p id="info">Sent by: {{post.sender}} at {{post.timestamp}}</p>
                     
                 </div>
             </div>            
