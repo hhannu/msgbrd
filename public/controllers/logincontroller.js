@@ -43,6 +43,7 @@ module.controller('LoginController',['$scope','$location','$rootScope','LoginFac
             else{
                 $scope.user.showError = false;
                 $scope.user.email = "";
+                $scope.user.checked = false;
             }
         });
     };
